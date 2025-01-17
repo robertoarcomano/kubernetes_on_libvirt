@@ -1,2 +1,2 @@
 #!/bin/bash
-vagrant up
+vagrant up > log 2>&1
