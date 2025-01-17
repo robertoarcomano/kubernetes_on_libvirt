@@ -1,28 +1,3 @@
-# kubernetes_on_libvirt
-How to create a Kube cluster using libvirt
-
-## 1 Create Network
-[kubenet.xml](kubenet.xml)
-
-```
-<network>
-    <name>kubenet</name>
-    <bridge name='virbr1'/>
-    <ip address='192.168.100.1' netmask='255.255.255.0'>
-    </ip>
-</network>
-```
-[create_network.sh](create_network.sh)
-
-```
-virsh net-define kubenet.xml
-virsh net-start kubenet
-virsh net-autostart kubenet
-```
-
-## 2. Create vm
-[Vagrantfile](Vagrantfile)
-```
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2004" # Sostituisci con una box compatibile con Libvirt
   config.vm.define "master" do |master|
@@ -51,19 +26,3 @@ Vagrant.configure("2") do |config|
       worker2.vm.hostname = "worker2"
   end
 end
-```
-[create_vm.sh](create_vm.sh)
-```
-#!/bin/bash
-vagrant up
-```
-[destroy_vm.sh](destroy_vm.sh)
-```
-#!/bin/bash
-vagrant destroy -f
-```
-[connect_vm.sh](connect_vm.sh)
-```
-#!/bin/bash
-vagrant ssh $1
-```
