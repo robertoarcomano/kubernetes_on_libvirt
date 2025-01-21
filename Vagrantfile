@@ -39,10 +39,6 @@ Vagrant.configure("2") do |config|
       worker1.vm.provision "shell", inline: <<-SHELL
         /tmp/common.sh
       SHELL
-      worker1.vm.provision "file", source: "./provision/worker1.sh", destination: "/tmp/worker1.sh"
-      worker1.vm.provision "shell", inline: <<-SHELL
-        /tmp/worker1.sh
-      SHELL
   end
   config.vm.define "worker2" do |worker2|
       worker2.vm.provider "libvirt" do |libvirt|
@@ -59,10 +55,6 @@ Vagrant.configure("2") do |config|
       worker2.vm.provision "file", source: "./provision/common.sh", destination: "/tmp/common.sh"
       worker2.vm.provision "shell", inline: <<-SHELL
         /tmp/common.sh
-      SHELL
-      worker2.vm.provision "file", source: "./provision/worker2.sh", destination: "/tmp/worker2.sh"
-      worker2.vm.provision "shell", inline: <<-SHELL
-        /tmp/worker2.sh
       SHELL
   end
 end
