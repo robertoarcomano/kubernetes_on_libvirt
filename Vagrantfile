@@ -8,7 +8,6 @@ Vagrant.configure("2") do |config|
       master.vm.hostname = "master"
       master.vm.network "private_network", ip: "192.168.100.101", virtualbox__intnet: "kubenet"
       master.vm.hostname = "master"
-#       master.vm.synced_folder "./provision/.ssh", "/home/vagrant/.ssh"
       master.vm.provision "file", source: "./provision/.ssh/id_rsa", destination: "/home/vagrant/.ssh/id_rsa"
       master.vm.provision "file", source: "./provision/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
       master.vm.provision "shell", inline: <<-SHELL
