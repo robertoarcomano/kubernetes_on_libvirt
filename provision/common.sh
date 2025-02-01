@@ -22,8 +22,15 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
 EOF
 sysctl --system
-echo "
-192.168.100.101 master
-192.168.100.102 worker1
-192.168.100.103 worker2" >> /etc/hosts
+
+NUM_WORKERS=$1
+BASE_IP="192.168.100."
+
+# Aggiungi la riga per il master
+echo "${BASE_IP}101 master" | sudo tee -a /etc/hosts
+
+# Aggiungi le righe per i worker
+for i in $(seq 1 $NUM_WORKERS); do
+    echo "${BASE_IP}$((101 + i)) worker${i}" | sudo tee -a /etc/hosts
+done
 #reboot
